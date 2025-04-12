@@ -14,6 +14,7 @@ class IsItFiveOClock:
         # Cities with timezones (city, country, timezone, drinking_related, fun_fact)
         self.cities = [
             # Cities with drinking-related names
+            # pylint: disable=line-too-long
             (
                 "Bourbon",
                 "USA",
@@ -77,6 +78,7 @@ class IsItFiveOClock:
                 True,
                 "Vodka is traditionally made from potatoes or grains, and Russia has a museum dedicated to the spirit.",
             ),
+            # pylint: disable=line-too-long
             # Regular major cities around the world (covering different timezones)
             (
                 "New York",
@@ -85,6 +87,7 @@ class IsItFiveOClock:
                 False,
                 "New York City has the largest number of billionaires in the world.",
             ),
+            # pylint: disable=line-too-long
             (
                 "Chicago",
                 "USA",
@@ -246,6 +249,7 @@ class IsItFiveOClock:
                 False,
                 "Santiago is surrounded by the Andes mountains, which are visible from the city.",
             ),
+            # pylint: disable=line-too-long
             (
                 "Havana",
                 "Cuba",
@@ -253,6 +257,7 @@ class IsItFiveOClock:
                 False,
                 "Havana has a unique mix of Spanish colonial architecture and Soviet-era buildings.",
             ),
+            # pylint: disable=line-too-long
             (
                 "Lima",
                 "Peru",
@@ -310,6 +315,7 @@ class IsItFiveOClock:
         city_info = self.find_drinking_city()
 
         if not city_info:
+            # pylint: disable=line-too-long
             return "It's always 5 o'clock somewhere, but we couldn't find a specific place right now."
 
         city, country, can_drink, drinking_related, fun_fact = city_info

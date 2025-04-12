@@ -1,3 +1,5 @@
+"""Module to create and configure the Flask application for IsItFiveOClock."""
+
 from os import environ, urandom
 
 from flask import Flask, render_template
@@ -10,14 +12,14 @@ version = environ.get("VERSION")
 
 def create_app(config=None):
     """Create and configure the Flask application."""
-    site_short_name = "isitfiveoclock"
+
     secret_key = str(urandom(12).hex())
 
     app = Flask(__name__, instance_relative_config=True)
 
     # Set default configuration
     app.config.from_mapping(
-        SECRET_KEY="dev",
+        SECRET_KEY=secret_key,
     )
 
     # Load config from parameter if provided
@@ -63,10 +65,10 @@ def create_app(config=None):
     # Error handling
     @app.errorhandler(404)
     def not_found(e):
-        return "Page not found", 404
+        return f"Page not found {e}", 404
 
     @app.errorhandler(500)
     def internal_error(e):
-        return "Internal server error", 500
+        return f"Internal server error {e}", 500
 
     return app
