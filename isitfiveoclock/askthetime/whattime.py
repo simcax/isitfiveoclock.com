@@ -166,6 +166,27 @@ class IsItFiveOClock:
                 "Sydney's Opera House has over 1 million tiles on its roof.",
             ),
             (
+                "Melbourne",
+                "Australia",
+                "Australia/Melbourne",
+                False,
+                "Melbourne was the capital city of Australia for 26 years from 1901 to 1927.",
+            ),
+            (
+                "Brisbane",
+                "Australia",
+                "Australia/Brisbane",
+                False,
+                "Brisbane is home to the world's first koala sanctuary, the Lone Pine Koala Sanctuary.",
+            ),
+            (
+                "Perth",
+                "Australia",
+                "Australia/Perth",
+                False,
+                "Perth is one of the most isolated major cities in the world, with the nearest city over 2,000km away.",
+            ),
+            (
                 "Auckland",
                 "New Zealand",
                 "Pacific/Auckland",

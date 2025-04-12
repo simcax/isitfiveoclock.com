@@ -5,6 +5,7 @@ from os import environ, urandom
 from flask import Flask, render_template
 
 from isitfiveoclock.askthetime.whattime import IsItFiveOClock
+from isitfiveoclock.routes.image_routes import images_bp
 
 app_environment = environ.get("ENVIRONMENT_NAME", "development")
 version = environ.get("VERSION")
@@ -70,5 +71,7 @@ def create_app(config=None):
     @app.errorhandler(500)
     def internal_error(e):
         return f"Internal server error {e}", 500
+
+    app.register_blueprint(images_bp)
 
     return app
