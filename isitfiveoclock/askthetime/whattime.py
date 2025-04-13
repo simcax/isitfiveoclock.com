@@ -15,6 +15,8 @@ class IsItFiveOClock:
         # Cities with timezones (city, country, timezone, drinking_related, fun_fact)
         self.cities = [
             # Cities with drinking-related names
+            ("Pierre", "USA", "US/Central", True),
+            ("Saint-Pierre", "France", "America/Miquelon", True),
             ("Bourbon", "USA", "US/Eastern", True),
             ("Whiskey", "USA", "US/Pacific", True),
             ("Beer", "USA", "US/Central", True),
