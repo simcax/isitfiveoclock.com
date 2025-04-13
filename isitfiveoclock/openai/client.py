@@ -2,6 +2,7 @@
 
 from os import environ
 
+from loguru import logger
 from openai import OpenAI
 
 
@@ -9,7 +10,11 @@ class OpenAIClient:
     def __init__(self):
         self.api_key = environ.get("OPENAI_API_KEY")
         self.client()
-        pass
+        if self.api_key is None:
+            logger.error(
+                "OpenAI API key not found in environment variables. Set secret OPENAI_API_KEY"
+            )
+            raise ValueError("OpenAI API key not found in environment variables.")
 
     def client(self) -> OpenAI:
         """
