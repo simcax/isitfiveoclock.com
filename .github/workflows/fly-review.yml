@@ -55,7 +55,10 @@ jobs:
           url=${{ steps.deploy.outputs.url }}
           modified_url=${url#https://}
       - name: Set app name
-        run: echo "FLY_APP=${{ github.repository.replace('.', '-') }}-pr-${{ github.event.number }}" >> $GITHUB_ENV
+        run: |
+          REPO_NAME=${{ github.repository }}
+          REPO_NAME_CLEAN=${REPO_NAME//./-}
+          echo "FLY_APP=${REPO_NAME_CLEAN}-pr-${{ github.event.number }}" >> $GITHUB_ENV
       - name: Deploy PR app to Fly.io
         id: deploy
         uses: superfly/fly-pr-review-apps@1.2.1
