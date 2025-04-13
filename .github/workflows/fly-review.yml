@@ -57,3 +57,6 @@ jobs:
       - name: Deploy PR app to Fly.io
         id: deploy
         uses: superfly/fly-pr-review-apps@1.2.1
+        with:
+          secrets: |
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
