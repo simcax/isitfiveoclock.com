@@ -5,7 +5,9 @@ from os import environ, urandom
 from flask import Flask, render_template
 
 from isitfiveoclock.askthetime.whattime import IsItFiveOClock
+from isitfiveoclock.routes.api_routes import api_bp
 from isitfiveoclock.routes.image_routes import images_bp
+from isitfiveoclock.routes.snippet_routes import snippets_bp
 
 app_environment = environ.get("ENVIRONMENT_NAME", "development")
 version = environ.get("VERSION")
@@ -54,10 +56,8 @@ def create_app(config=None):
         # Create an instance of IsItFiveOClock
         time_checker = IsItFiveOClock()
         # Get the message
-        message, fun_fact = time_checker.is_it_five_oclock()
-        return render_template(
-            "isitfiveoclock.html", message=message, fun_fact=fun_fact
-        )
+        message, city = time_checker.is_it_five_oclock()
+        return render_template("isitfiveoclock.html", message=message, city=city)
 
     @app.route("/version")
     def version_info():
@@ -73,5 +73,8 @@ def create_app(config=None):
         return f"Internal server error {e}", 500
 
     app.register_blueprint(images_bp)
+    app.register_blueprint(api_bp)
+    app.register_blueprint(snippets_bp)
+    print(app.url_map)
 
     return app

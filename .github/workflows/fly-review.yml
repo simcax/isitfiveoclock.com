@@ -56,4 +56,8 @@ jobs:
           modified_url=${url#https://}
       - name: Deploy PR app to Fly.io
         id: deploy
-        uses: superfly/fly-pr-review-apps@1.2.1
+        uses: superfly/fly-pr-review-apps@1.3.0
+        with:
+          secrets: |
+            OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}
+          name: pr-${{ github.event.number }}-${{ github.repository_owner }}-isitfiveoclock-com
