@@ -99,6 +99,11 @@ class IsItFiveOClock:
             ("Auckland", "New Zealand", "Pacific/Auckland", False),
             ("Wellington", "New Zealand", "Pacific/Auckland", False),
             ("Christchurch", "New Zealand", "Pacific/Auckland", False),
+            # PONT Timezone (UTC+11)
+            ("Palikir", "Micronesia", "Pacific/Ponape", False),
+            ("Kolonia", "Micronesia", "Pacific/Ponape", False),
+            ("Pohnpei", "Micronesia", "Pacific/Ponape", False),
+            ("Weno", "Micronesia", "Pacific/Ponape", False),
             ("Yangon", "Myanmar", "Asia/Yangon", False),
             ("Kathmandu", "Nepal", "Asia/Kathmandu", False),
             # South America
