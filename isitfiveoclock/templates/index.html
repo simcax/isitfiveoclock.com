@@ -2,15 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=3.5">
     <title>Is It Five O'Clock?</title>
     <script src="https://unpkg.com/htmx.org@1.9.8"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3cf178cb85734077bafb6d74f17e377f"}'></script><!-- End Cloudflare Web Analytics -->
 </head>
-<body class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen flex items-center justify-center text-white">
-    <div class="container mx-auto px-4">
-        <div class="max-w-md mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8">
+<body class="bg-gradient-to-br from-indigo-500 to-purple-600 min-h-screen flex items-center justify-center text-white relative overflow-hidden">
+    
+    
+    <div class="container mx-auto px-4 relative z-10">
+        
             <h1 class="text-4xl font-bold text-center mb-8">Is It Five O'Clock?</h1>
             <p class="text-center mb-8 text-lg">The answer you're looking for might be just a click away...</p>
             
@@ -28,11 +30,11 @@
                 </button>
             </div>
             
-            <p class="text-center mt-8 text-sm opacity-80">It's always five o'clock somewhere!</p>
+            <p class="text-center mt-8 text-sm opacity-80 text-amber-900">It's always five o'clock somewhere!</p>
         </div>
     </div>
     <!-- Footer -->
-    <footer class="fixed bottom-0 left-0 w-full py-2 text-center bg-black/30 backdrop-blur-sm">
+    <footer class="fixed bottom-0 left-0 w-full py-2 text-center bg-black/90 z-20">
         <p class="text-sm text-gray-300">Created with ❤️ by 
             <a href="https://www.skov.codes" class="inline-flex items-center px-3 py-1 rounded-full border border-blue-800 bg-blue-500/20 text-blue-100 hover:bg-blue-500/30 transition duration-300">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

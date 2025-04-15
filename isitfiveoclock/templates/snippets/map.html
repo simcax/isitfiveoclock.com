@@ -1,12 +1,12 @@
 <div 
-    class="fixed inset-0 z-[-1] overflow-hidden opacity-25 transition-opacity duration-700 ease-in-out"
+    class="fixed inset-0 z-[-1] overflow-hidden opacity-100 transition-opacity duration-700 ease-in-out"
     id="map-backdrop"
 >
     <img 
         src="data:image/png;base64,{{ map_data }}" 
         alt="Location map" 
-        class="w-full h-full object-cover filter blur-sm"
-        onload="this.parentElement.classList.add('opacity-95')"
+        class="w-full h-full object-cover filter"
+        onload="this.parentElement.classList.add('opacity-50')"
         onerror="this.parentElement.classList.add('hidden')"
     >
     <div class="absolute inset-0 bg-gradient-to-b from-transparent to-amber-100/30"></div>

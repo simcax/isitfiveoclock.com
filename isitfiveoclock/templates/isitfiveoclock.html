@@ -1,23 +1,40 @@
-<div class="text-center p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg animate-fade-in">
+<!-- Map backdrop - loaded via HTMX -->
+    
+<div class="max-w-2xl mx-auto bg-white/20 backdrop-blur-lg rounded-xl shadow-lg p-0 relative">
+    <div 
+id="map-background"
+class="absolute inset-0 z-[-1] w-full h-full overflow-hidden"
+hx-get="/snippets/get-map?city={{ city }}&country={{ country }}" 
+hx-trigger="load"
+hx-swap="innerHTML">
+<!-- Map will be loaded here -->
+</div>
+<div class="text-center p-0  animate-fade-in">
     <div class="mb-6">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
     </div>
     
-    <h2 class="text-2xl font-bold mb-4">{{ message }}</h2>
+    <div class="relative mb-6">
+        <!-- Bottom shadow layer with wavy effect -->
+        <div class="absolute inset-0 bg-amber-800/70 rounded-md transform rotate-[-0.7deg] translate-y-1"></div>
+        
+        <!-- Middle layer with opposite rotation -->
+        <div class="absolute inset-0 bg-amber-500/90 rounded-md transform rotate-[0.5deg]"></div>
+        
+        <!-- Main banner with text -->
+        <h2 class="relative w-full text-2xl font-bold py-3 px-4 bg-amber-600 text-white rounded-md shadow-md transform rotate-[-0.3deg]">
+            {{ message }}
+        </h2>
+        
+    </div>
     
     <p class="mb-6 italic">Cheers to that!</p>
     
     <!-- Outer container with relative positioning -->
     <div class="relative mb-6">
-        <!-- Map container with absolute positioning to be behind content -->
-         <!-- hx-post="/snippets/get-map?city={{ city }}&country={{ country }}"  -->
-        <div id="map-background" class="absolute inset-0 z-0 overflow-hidden rounded-lg"
-             hx-get="/snippets/get-map?city=copenhagen&country=denmark" 
-             hx-trigger="load" 
-             hx-swap="innerHTML">
-        </div>
+        
         
         <!-- "DID YOU KNOW?" container positioned lower with margin-top and z-index to be above map -->
         <div class="mt-30">  <!-- Added margin-top to position the box lower -->

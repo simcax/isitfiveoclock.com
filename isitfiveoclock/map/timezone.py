@@ -3,6 +3,7 @@
 import base64
 import os
 import time
+from urllib.parse import quote
 
 import folium
 import requests
@@ -61,7 +62,17 @@ class TimezoneMap:
             raise Exception("Geocoding failed")
 
         # Create the static map URL
-        static_map_url = f"https://maps.googleapis.com/maps/api/staticmap?center={lat},{lng}&zoom={zoom}&size={width}x{height}&maptype={map_type}&markers=color:{marker_color}%7Clabel:S%7C{lat},{lng}&key={API_KEY}"
+        # Calculate a shifted center to position the marker in the right third
+        # Adjust longitude based on zoom level - higher zoom needs smaller offset
+        longitude_shift = 560 / (
+            2 ** (zoom + 2)
+        )  # Appropriate shift based on zoom level
+        shifted_lng = (
+            lng - longitude_shift
+        )  # Shift center left, placing marker on right third
+
+        label_text = quote("5")
+        static_map_url = f"https://maps.googleapis.com/maps/api/staticmap?center={lat},{shifted_lng}&zoom={zoom}&size={width}x{height}&maptype={map_type}&markers=color:{marker_color}%7Clabel:{label_text}%7C{lat},{lng}&key={API_KEY}"
 
         # Fetch the static map image
         response = requests.get(static_map_url)

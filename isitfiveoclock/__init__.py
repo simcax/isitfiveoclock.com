@@ -56,8 +56,10 @@ def create_app(config=None):
         # Create an instance of IsItFiveOClock
         time_checker = IsItFiveOClock()
         # Get the message
-        message, city = time_checker.is_it_five_oclock()
-        return render_template("isitfiveoclock.html", message=message, city=city)
+        message, city, country = time_checker.is_it_five_oclock()
+        return render_template(
+            "isitfiveoclock.html", message=message, city=city, country=country
+        )
 
     @app.route("/version")
     def version_info():
