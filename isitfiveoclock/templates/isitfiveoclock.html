@@ -1,9 +1,9 @@
 <!-- Map backdrop - loaded via HTMX -->
     
 <div class="max-w-2xl mx-auto bg-white/20 backdrop-blur-lg rounded-xl shadow-lg p-0 relative">
-    <div 
+<div 
 id="map-background"
-class="absolute inset-0 z-[-1] w-full h-full overflow-hidden"
+class="absolute top-0 left-0 w-full h-full z-[-1] overflow-hidden rounded-xl"
 hx-get="/snippets/get-map?city={{ city }}&country={{ country }}" 
 hx-trigger="load"
 hx-swap="innerHTML">
@@ -37,8 +37,8 @@ hx-swap="innerHTML">
         
         
         <!-- "DID YOU KNOW?" container positioned lower with margin-top and z-index to be above map -->
-        <div class="mt-30">  <!-- Added margin-top to position the box lower -->
-            <div class="p-5 bg-gradient-to-r from-amber-300/70 to-yellow-200/70 backdrop-blur-sm border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden z-10">
+        <div class="px-0">  <!-- Added margin-top to position the box lower -->
+            <div class="p-0 bg-gradient-to-r from-amber-300/70 to-yellow-200/70 backdrop-blur-sm border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden z-10">
                 <!-- Stars decoration -->
                 <div class="absolute -top-1 -left-1 text-yellow-500">★</div>
                 <div class="absolute top-2 right-3 text-amber-600">★</div>
