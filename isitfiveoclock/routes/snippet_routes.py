@@ -2,6 +2,7 @@
 
 from flask import Blueprint, jsonify, render_template, request
 
+from isitfiveoclock.map.timezone import TimezoneMap
 from isitfiveoclock.openai.client import OpenAIClient
 
 snippets_bp = Blueprint("snippets", __name__, url_prefix="/snippets")
@@ -36,3 +37,31 @@ def get_fact():
 
     # Return the fun fact as html
     return render_template("snippets/fun_fact.html", response=response)
+
+
+@snippets_bp.route("/get-map", methods=["POST"])
+def get_map():
+    """Return html for the map snippet."""
+    # Get the city from the request args
+    city = request.args.get("city")
+    country = request.args.get("country")
+    if not city:
+        return "<div>City not provided</div>", 400
+    # Check if the city is a string
+    if not isinstance(city, str):
+        return "<div>Invalid city</div>", 400
+    if not country:
+        return "<div>country not provided</div>", 400
+    tz_map = TimezoneMap()
+    # Create the map
+    map_data = tz_map.create_static_map(
+        city=city,
+        country=country,
+        map_type="roadmap",
+        zoom=5,
+        width=800,
+        height=600,
+    )
+
+    # Return the map as html
+    return render_template("snippets/map.html", city=city)
