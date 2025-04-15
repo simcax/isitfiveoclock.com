@@ -9,30 +9,44 @@
     
     <p class="mb-6 italic">Cheers to that!</p>
     
-    <div class="p-5 mb-6 bg-gradient-to-r from-amber-300 to-yellow-200 border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden">
-        <!-- Stars decoration -->
-        <div class="absolute -top-1 -left-1 text-yellow-500">★</div>
-        <div class="absolute top-2 right-3 text-amber-600">★</div>
-        <div class="absolute bottom-1 left-5 text-amber-600">★</div>
+    <!-- Outer container with relative positioning -->
+    <div class="relative mb-6">
+        <!-- Map container with absolute positioning to be behind content -->
+         <!-- hx-post="/snippets/get-map?city={{ city }}&country={{ country }}"  -->
+        <div id="map-background" class="absolute inset-0 z-0 overflow-hidden rounded-lg"
+             hx-get="/snippets/get-map?city=copenhagen&country=denmark" 
+             hx-trigger="load" 
+             hx-swap="innerHTML">
+        </div>
         
-        <h3 class="font-bold text-xl text-center mb-2 text-amber-800">DID YOU KNOW?</h3>
-        
-        <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-amber-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- "DID YOU KNOW?" container positioned lower with margin-top and z-index to be above map -->
+        <div class="mt-30">  <!-- Added margin-top to position the box lower -->
+            <div class="p-5 bg-gradient-to-r from-amber-300/70 to-yellow-200/70 backdrop-blur-sm border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden z-10">
+                <!-- Stars decoration -->
+                <div class="absolute -top-1 -left-1 text-yellow-500">★</div>
+                <div class="absolute top-2 right-3 text-amber-600">★</div>
+                <div class="absolute bottom-1 left-5 text-amber-600">★</div>
+                
+                <h3 class="font-bold text-xl text-center mb-2 text-amber-950">DID YOU KNOW?</h3>
+                
+                <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-amber-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <div hx-get="/snippets/get-fact?city={{ city }}" hx-swap="innerHTML" hx-target="#fact-container" class="flex-1" hx-trigger="load">
+                </svg>
+                <div hx-get="/snippets/get-fact?city={{ city }}" hx-swap="innerHTML" hx-target="#fact-container" class="flex-1" hx-trigger="load">
                 <p id="fact-container" class="text-gray-800 font-medium">
-                    <span class="inline-flex items-center">
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span>Loading interesting fact...</span>
-                    </span>
+                <span class="inline-flex items-center">
+                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Loading interesting fact...</span>
+                </span>
                 </p>
+                </div>
+                <p class="text-gray-800 font-medium"></p>
+                
             </div>
-            <p class="text-gray-800 font-medium"></p>
         </div>
     </div>
     <div id="result-container"></div>

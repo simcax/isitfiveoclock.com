@@ -39,7 +39,7 @@ def get_fact():
     return render_template("snippets/fun_fact.html", response=response)
 
 
-@snippets_bp.route("/get-map", methods=["POST"])
+@snippets_bp.route("/get-map", methods=["GET"])
 def get_map():
     """Return html for the map snippet."""
     # Get the city from the request args
@@ -58,10 +58,10 @@ def get_map():
         city=city,
         country=country,
         map_type="roadmap",
-        zoom=5,
-        width=800,
-        height=600,
+        zoom=1,
+        width=640,
+        height=640,
     )
 
     # Return the map as html
-    return render_template("snippets/map.html", city=city)
+    return render_template("snippets/map.html", city=city, map_data=map_data)

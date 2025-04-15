@@ -1,5 +1,6 @@
 """Class for creating a timezone map."""
 
+import base64
 import os
 import time
 
@@ -40,7 +41,8 @@ class TimezoneMap:
 
     def create_static_map(
         self,
-        address: str,
+        city: str,
+        country: str,
         width: int,
         height: int,
         zoom: int = 5,
@@ -48,6 +50,7 @@ class TimezoneMap:
         marker_color: str = "red",
     ):
         # Geocode the address to get latitude and longitude
+        address = f"{city}, {country}"
         geocode_url = f"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={API_KEY}"
         geocode_response = requests.get(geocode_url)
         geocode_data = geocode_response.json()
@@ -62,7 +65,10 @@ class TimezoneMap:
 
         # Fetch the static map image
         response = requests.get(static_map_url)
+
         if response.status_code == 200:
-            return response.content
+            # Base64 encode the image data
+            image_data = base64.b64encode(response.content).decode("utf-8")
+            return image_data
         else:
             raise Exception("Failed to fetch the static map")
