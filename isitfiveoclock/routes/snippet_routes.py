@@ -1,6 +1,7 @@
 """Routes returning snippets for the frontend."""
 
 from flask import Blueprint, jsonify, render_template, request
+from loguru import logger
 
 from isitfiveoclock.map.timezone import TimezoneMap
 from isitfiveoclock.openai.client import OpenAIClient
@@ -42,6 +43,28 @@ def get_fact():
 @snippets_bp.route("/get-map", methods=["GET"])
 def get_map():
     """Return html for the map snippet."""
+    # Get the screen size of the user
+    # Get the screen size from the request args
+    width = request.args.get("width", 200)  # Default to 200 if not provided
+    height = request.args.get("height", 400)  # Default to 400 if not provided
+
+    # Get the width and height from the request args
+    logger.debug(f"Width: {width}, Height: {height}")
+    # Log all arguments
+    logger.debug(f"Request args: {request.args}")
+    # Convert to integers
+    try:
+        width = int(width)
+        height = int(height)
+    except (ValueError, TypeError):
+        # If conversion fails, use defaults
+        width = 200
+        height = 400
+
+    # Ensure reasonable limits to prevent extreme sizes
+    width = max(100, min(1200, width))  # Between 100 and 1200
+    height = max(100, min(1200, height))  # Between 100 and 1200
+
     # Get the city from the request args
     city = request.args.get("city")
     country = request.args.get("country")
@@ -59,8 +82,8 @@ def get_map():
         country=country,
         map_type="roadmap",
         zoom=1,
-        width=640,
-        height=640,
+        width=200,
+        height=400,
     )
 
     # Return the map as html
