@@ -10,14 +10,15 @@ hx-trigger="load"
 hx-swap="innerHTML">
 <!-- Map will be loaded here -->
 </div>
-<div class="text-center p-0  animate-fade-in">
+<div class="text-center p-0 animate-fade-in">
     <div class="mb-6">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
     </div>
     
-    <div class="relative mb-2">
+    <!-- Main title with gradient background -->
+    <div class="relative mb-2 w-[70%] mx-auto">
         <!-- Bottom shadow layer with wavy effect -->
         <div class="absolute inset-0 bg-amber-800/70 rounded-md transform rotate-[-0.7deg] translate-y-1"></div>
         
@@ -28,7 +29,7 @@ hx-swap="innerHTML">
         <h2 class="relative w-full text-2xl font-bold py-3 px-4 bg-amber-600 text-white rounded-md shadow-md transform rotate-[-0.3deg]">
             {{ message }}
         </h2>
-        
+            
     </div>
     
     <p class="mb-20 italic">Cheers to that!</p>
@@ -39,7 +40,7 @@ hx-swap="innerHTML">
         
         <!-- "DID YOU KNOW?" container positioned lower with margin-top and z-index to be above map -->
         <div class="px-0">  <!-- Added margin-top to position the box lower -->
-            <div class="p-0 bg-gradient-to-r from-amber-300/70 to-yellow-200/70 backdrop-blur-sm border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden z-10">
+            <div class="w-[80%] mx-auto p-4 bg-gradient-to-r from-amber-300/70 to-yellow-200/70 backdrop-blur-sm border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden z-10 gap-2">
                 <!-- Stars decoration -->
                 <div class="absolute -top-1 -left-1 text-yellow-500">★</div>
                 <div class="absolute top-2 right-3 text-amber-600">★</div>
@@ -72,7 +73,7 @@ hx-swap="innerHTML">
         hx-get="/isitfiveoclock"
         hx-target="#result-container"
         hx-swap="innerHTML"
-        class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl"
+        class="mt-6 mb-3 bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl"
         hx-indicator="#spinner"
     >
         <span id="spinner" class="htmx-indicator hidden">

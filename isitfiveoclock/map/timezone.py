@@ -71,7 +71,7 @@ class TimezoneMap:
             lng - longitude_shift
         )  # Shift center left, placing marker on right third
         # Adjust the latitude based on zoom level, so the marker is higher up in the map
-        latitude_shift = -150 / (2 ** (zoom + 2))
+        latitude_shift = -200 / (2 ** (zoom + 2))
         shifted_lat = lat + latitude_shift
         # Set the label text for the marker
         label_text = quote("5")
