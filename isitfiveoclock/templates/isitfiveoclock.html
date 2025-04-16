@@ -4,6 +4,7 @@
 <div 
 id="map-background"
 class="absolute top-0 left-0 w-full h-full z-[-1] overflow-hidden rounded-xl"
+style="top: -25px;"
 hx-get="/snippets/get-map?city={{ city }}&country={{ country }}" 
 hx-trigger="load"
 hx-swap="innerHTML">
@@ -16,7 +17,7 @@ hx-swap="innerHTML">
         </svg>
     </div>
     
-    <div class="relative mb-6">
+    <div class="relative mb-2">
         <!-- Bottom shadow layer with wavy effect -->
         <div class="absolute inset-0 bg-amber-800/70 rounded-md transform rotate-[-0.7deg] translate-y-1"></div>
         
@@ -30,10 +31,10 @@ hx-swap="innerHTML">
         
     </div>
     
-    <p class="mb-6 italic">Cheers to that!</p>
+    <p class="mb-20 italic">Cheers to that!</p>
     
     <!-- Outer container with relative positioning -->
-    <div class="relative mb-6">
+    <div class="relative mb-12">
         
         
         <!-- "DID YOU KNOW?" container positioned lower with margin-top and z-index to be above map -->

@@ -70,9 +70,13 @@ class TimezoneMap:
         shifted_lng = (
             lng - longitude_shift
         )  # Shift center left, placing marker on right third
-
+        # Adjust the latitude based on zoom level, so the marker is higher up in the map
+        latitude_shift = -150 / (2 ** (zoom + 2))
+        shifted_lat = lat + latitude_shift
+        # Set the label text for the marker
         label_text = quote("5")
-        static_map_url = f"https://maps.googleapis.com/maps/api/staticmap?center={lat},{shifted_lng}&zoom={zoom}&size={width}x{height}&maptype={map_type}&markers=color:{marker_color}%7Clabel:{label_text}%7C{lat},{lng}&key={API_KEY}"
+        # Create the static map URL
+        static_map_url = f"https://maps.googleapis.com/maps/api/staticmap?center={shifted_lat},{shifted_lng}&zoom={zoom}&size={width}x{height}&maptype={map_type}&markers=color:{marker_color}%7Clabel:{label_text}%7C{lat},{lng}&key={API_KEY}"
 
         # Fetch the static map image
         response = requests.get(static_map_url)
