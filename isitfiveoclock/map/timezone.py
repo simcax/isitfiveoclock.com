@@ -64,9 +64,7 @@ class TimezoneMap:
         # Create the static map URL
         # Calculate a shifted center to position the marker in the right third
         # Adjust longitude based on zoom level - higher zoom needs smaller offset
-        longitude_shift = 560 / (
-            2 ** (zoom + 2)
-        )  # Appropriate shift based on zoom level
+        longitude_shift = 0 / (2 ** (zoom + 2))  # Appropriate shift based on zoom level
         shifted_lng = (
             lng - longitude_shift
         )  # Shift center left, placing marker on right third
