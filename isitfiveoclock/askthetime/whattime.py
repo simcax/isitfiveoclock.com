@@ -195,4 +195,4 @@ class IsItFiveOClock:
         else:
             message += " Time for a drink!"
 
-        return message, city
+        return message, city, country

@@ -1,38 +1,99 @@
-<div class="text-center p-6 bg-white/20 backdrop-blur-lg rounded-xl shadow-lg animate-fade-in">
-    <div class="mb-6">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
+<!-- Map backdrop - loaded via HTMX -->
+    <!-- Screen size detection for map -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const mapContainer = document.getElementById('map-background');
+            if (mapContainer) {
+                const screenWidth = window.innerWidth;
+                const screenHeight = window.innerHeight;
+                const currentUrl = mapContainer.getAttribute('hx-get');
+                
+                // Append screen dimensions to the URL
+                const updatedUrl = `${currentUrl}&width=${screenWidth}&height=${screenHeight}`;
+                mapContainer.setAttribute('hx-get', updatedUrl);
+            }
+        });
+        
+        // Update dimensions if window is resized
+        window.addEventListener('resize', function() {
+            const mapContainer = document.getElementById('map-background');
+            if (mapContainer) {
+                const screenWidth = window.innerWidth;
+                const screenHeight = window.innerHeight;
+                let currentUrl = mapContainer.getAttribute('hx-get');
+                
+                // Remove any existing width/height params
+                currentUrl = currentUrl.replace(/&width=\d+&height=\d+/, '');
+                
+                // Append updated dimensions
+                const updatedUrl = `${currentUrl}&width=${screenWidth}&height=${screenHeight}`;
+                mapContainer.setAttribute('hx-get', updatedUrl);
+            }
+        });
+    </script>
+    <!--   bg-white/20 mx-auto   p-0 absolute top-0 left-0 overflow-hidden 
+       style="top: -80px;height: 100%; border-radius: inherit;"
+       w-full h-full
+    -->
+<div class="rounded-xl max-w-2xl relative shadow-lg overflow-hidden">
+    <div 
+        id="map-background"
+        class="absolute inset-0 w-full h-full z-[-1] rounded-xl"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        hx-get="/snippets/get-map?city={{ city }}&country={{ country }}" 
+        hx-trigger="load"
+        hx-swap="innerHTML">
+        <!-- Map will be loaded here -->
+    </div>
+    <div class="text-center p-0 animate-fade-in space-y-16 relative z-10">
+        <!-- Content goes here -->
+        <div class="relative mb-2 w-[70%] mx-auto">
+            <!-- Bottom shadow layer with wavy effect -->
+            <div class="absolute inset-0 bg-amber-800/70 rounded-md transform rotate-[-0.7deg] translate-y-1"></div>
+            
+            <!-- Middle layer with opposite rotation -->
+            <div class="absolute inset-0 bg-amber-500/90 rounded-md transform rotate-[0.5deg]"></div>
+            
+            <!-- Main banner with text -->
+            <h2 class="relative w-full text-2xl font-bold py-3 px-4 bg-amber-600 text-white rounded-md shadow-md transform rotate-[-0.3deg]">
+                {{ message }}
+            </h2>
+        </div>
+        <p class="mb-20 italic">Cheers to that!</p>
     </div>
     
-    <h2 class="text-2xl font-bold mb-4">{{ message }}</h2>
-    
-    <p class="mb-6 italic">Cheers to that!</p>
-    
-    <div class="p-5 mb-6 bg-gradient-to-r from-amber-300 to-yellow-200 border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden">
-        <!-- Stars decoration -->
-        <div class="absolute -top-1 -left-1 text-yellow-500">★</div>
-        <div class="absolute top-2 right-3 text-amber-600">★</div>
-        <div class="absolute bottom-1 left-5 text-amber-600">★</div>
+    <!-- Outer container with relative positioning -->
+    <div class="mt-8">
         
-        <h3 class="font-bold text-xl text-center mb-2 text-amber-800">DID YOU KNOW?</h3>
         
-        <div class="flex items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-amber-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <!-- "DID YOU KNOW?" container positioned lower with margin-top and z-index to be above map -->
+        <div>  <!-- Added margin-top to position the box lower -->
+            <div  class="w-[80%] mx-auto p-4 bg-gradient-to-r from-amber-300/70 to-yellow-200/70 backdrop-blur-sm border-2 border-dashed border-amber-500 rounded-lg shadow-lg transform rotate-1 relative overflow-hidden z-10 gap-2">
+                <!-- Stars decoration -->
+                <div class="absolute -top-1 -left-1 text-yellow-500">★</div>
+                <div class="absolute top-2 right-3 text-amber-600">★</div>
+                <div class="absolute bottom-1 left-5 text-amber-600">★</div>
+                
+                <h3 class="font-bold text-xl text-center mb-2 text-amber-950">DID YOU KNOW?</h3>
+                
+                <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-3 text-amber-700 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            <div hx-get="/snippets/get-fact?city={{ city }}" hx-swap="innerHTML" hx-target="#fact-container" class="flex-1" hx-trigger="load">
+                </svg>
+                <div hx-get="/snippets/get-fact?city={{ city }}" hx-swap="innerHTML" hx-target="#fact-container" class="flex-1" hx-trigger="load">
                 <p id="fact-container" class="text-gray-800 font-medium">
-                    <span class="inline-flex items-center">
-                        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        <span>Loading interesting fact...</span>
-                    </span>
+                <span class="inline-flex items-center">
+                    <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-amber-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span>Loading interesting fact...</span>
+                </span>
                 </p>
+                </div>
+                <p class="text-gray-800 font-medium"></p>
+                
             </div>
-            <p class="text-gray-800 font-medium"></p>
         </div>
     </div>
     <div id="result-container"></div>
@@ -40,7 +101,7 @@
         hx-get="/isitfiveoclock"
         hx-target="#result-container"
         hx-swap="innerHTML"
-        class="bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl"
+        class="mt-6 mb-3 bg-amber-500 hover:bg-amber-600 text-white font-bold py-3 px-6 rounded-lg transition duration-300 flex items-center justify-center gap-2 mx-auto shadow-lg hover:shadow-xl"
         hx-indicator="#spinner"
     >
         <span id="spinner" class="htmx-indicator hidden">
@@ -69,4 +130,3 @@
     });
 </script>
 
-    
