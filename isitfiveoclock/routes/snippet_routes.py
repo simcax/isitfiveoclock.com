@@ -81,7 +81,7 @@ def get_map():
         city=city,
         country=country,
         map_type="roadmap",
-        zoom=2,
+        zoom=1,
         width=300,
         height=400,
     )
