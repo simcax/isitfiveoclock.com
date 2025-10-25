@@ -16,8 +16,8 @@ jobs:
     if: github.actor == 'dependabot[bot]'
     permissions:
       contents: read
-      pull-requests: write
-      
+      id-token: write 
+
     outputs:
       url: ${{ steps.deploy.outputs.url }}
     # Only run one deployment at a time per PR.
