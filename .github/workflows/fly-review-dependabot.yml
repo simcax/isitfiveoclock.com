@@ -12,9 +12,7 @@ env:
 jobs:
   review_app:
     runs-on: ubuntu-latest
-    if: |
-      (github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository) ||
-      (github.event_name == 'pull_request_target' && github.actor == 'dependabot[bot]')
+    if: github.actor == 'dependabot[bot]'
 
     outputs:
       url: ${{ steps.deploy.outputs.url }}
@@ -32,6 +30,9 @@ jobs:
     steps:
       - name: Get code
         uses: actions/checkout@v4
+        with:
+          # This line fetches the actual commit from the Dependabot branch
+          ref: ${{ github.event.pull_request.head.sha }}
       - name: Install uv
         uses: astral-sh/setup-uv@v5
       - name: Setup Python
